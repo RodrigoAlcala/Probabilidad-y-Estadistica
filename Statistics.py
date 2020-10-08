@@ -5,7 +5,7 @@ import numpy
 
 
 
-data = [4,8,4,6,8,6,7,7,7,8,10,9,7,6,10,8,5,9,6,3,7,6,4,7,6,9,7,4,7,6,8,8,9,11,8,7,10,8,5,7,7,6,5,10,8,9,7,5,6,5]
+data = [3,7,4,4,5,5,5,4,6,7,4,5,4,4,6,4,7,8,5,3,4,3,10,4,6,3,4,3,3,4]
 
 
 def basicStatistics(dataList):
@@ -16,19 +16,32 @@ def basicStatistics(dataList):
 	variation = (deviation/mean)
 	median = statistics.median(dataList)
 	multimodes = statistics.multimode(dataList)
-
-	
-
 	print("En base a {}\nEl coeficiente de variacicion es: {} \nLa desviacón estándar es: {} \nLa media es: {}\nLa mediana es {}\nLas modas son: {}\nLa varianza es {}".format(dataList, variation ,deviation, mean, median, multimodes,varianza))
 
-	#generatePlot(dataList) 
+def numpyStats(dataList):
+	mediana = numpy.median(dataList)
+	promedio = numpy.average(dataList)
+	media = numpy.mean(dataList)
+	desviación = numpy.std(dataList)
+	varianza = numpy.var(dataList)
+	cuartil1 = numpy.quantile(dataList,0)
+	cuartil2 = numpy.quantile(dataList,0.25)
+	cuartil3 = numpy.quantile(dataList,0.50)
+	cuartil4 = numpy.quantile(dataList,0.75)
+	cuartil5 = numpy.quantile(dataList,1)
+	print("Mediana: {}\nPromedio: {}\nMedia: {}\nDesviación: {}\nVarianza: {}\nPrimer Cuartil: {}\nSegundo Cuartil: {}\nTercer Cuartil: {}\nCuarto Cuartil: {}\nQuinto Cuartil: {}".format(mediana,promedio,media,desviación,varianza,cuartil1,cuartil2,cuartil3,cuartil4,cuartil5))
+
+numpyStats(data)
+
+def generateGraphs(dataList):
+	generatePlot(dataList) 
 	generateHistogram(dataList)
 	generatePolygon(dataList)
 
 
 
 def generateHistogram(dataList):
-	pyplot.hist(dataList, color = "g", bins = "sturges")
+	pyplot.hist(dataList, color = "g", bins = "auto")
 	pyplot.grid(color = "black", lw = "0.5", axis = "x")
 	pyplot.title("Histograma")
 	pyplot.xlabel("Pesos")
@@ -60,3 +73,6 @@ def generatePolygon(dataList):
 
 
 basicStatistics(data)
+generateGraphs(data)
+
+
